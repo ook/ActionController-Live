@@ -5,6 +5,16 @@ Minimal test of `ActionController::Live`
 Rails7
 Ruby 3.1.1
 
+# PROBLEM SOLVED
+
+The culprit is ETag rack middleware that bufferize the response until the end to compute headers `ETag` and `Last-Modified`.
+We can bypass that behavior by setting them ourself.
+
+```
+    response.headers['Last-Modified'] = '0'
+    response.headers['ETag'] = '0'
+```
+
 # Running
 
     $ bundle install && bundle exec rails s -e production -p 4444
