@@ -1,7 +1,6 @@
 class StreamsController < ApplicationController
   include ActionController::Live
   def me
-    expires_now
     response.headers["Content-Type"] = "text/event-stream"
 
     # Mandatory to stream: rack middleware ETag will bufferize response to set those headers
